@@ -33,11 +33,8 @@ COPY ./quiz /var/www
 COPY --chown=$user:$user quiz /var/www
 WORKDIR /var/www
 
-RUN curl -sL https://deb.nodesource.com/setup_14.17.1 | bash
-RUN apt-get install --yes nodejs
-
 USER $user
 
-CMD ["sh", "-c", "cp -n .env.example .env && composer install && php artisan key:generate && php-fpm"]
+CMD ["sh", "-c", "cp -n .env.example .env && composer install && php artisan key:generate && php-fpm && php artisan migrate && php artisan db:seed --class=QuizSeeder"]
 
 EXPOSE 9000
