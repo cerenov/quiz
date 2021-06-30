@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container align-content-center bg-warning">
+    <div class="container align-content-center alert-success">
         <form action="{{route('quiz')}}" method="POST">
             @csrf
             <div class="container text-center">
@@ -38,7 +38,7 @@
                     <div class="align-content-center">
                         <button type="submit" class="btn btn-outline-primary mb-3" value="prev_question" name="button">предыдущий вопрос</button>
                         <button type="submit" class="btn btn-outline-primary mb-3" value="next_question" name="button">следующий вопрос</button>
-                        <button type="submit" class="btn btn-outline-success mb-3" value="end_quiz" name="button">завершить тест</button>
+                        <button type="submit" class="btn btn-outline-dark mb-3" value="end_quiz" name="button">завершить тест</button>
                     </div>
                 </div>
             </div>

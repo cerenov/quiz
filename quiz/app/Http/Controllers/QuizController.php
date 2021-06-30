@@ -168,10 +168,10 @@ class QuizController extends Controller
             $answers_dto
         );
 
-        $result = $quizResultService->getResult();
+        $result = $quizResultService->getResult() * 100;
 
-        $request->session()->forget('indexQuestion');
-        $request->session()->forget('arrayAnswers');
+//        $request->session()->forget('indexQuestion');
+//        $request->session()->forget('arrayAnswers');
 
         return view('result', [
             'result' => $result
