@@ -173,5 +173,44 @@ class QuizSeeder extends Seeder
                 ]);
             }
         }
+
+        {
+            // вопрос 5
+            DB::table('questions')->insert([
+                'id' => 5,
+                'text' => 'Какой из языков является компилируемым',
+                'quiz_id' => 1
+            ]);
+            {
+                // варианты ответов к вопросу 4
+                DB::table('choices')->insert([
+                    'id' => '17',
+                    'text' => 'java',
+                    'question_id' => 5,
+                    'is_сorrect' => true
+                ]);
+
+                DB::table('choices')->insert([
+                    'id' => '18',
+                    'text' => 'php',
+                    'question_id' => 5,
+                    'is_сorrect' => false
+                ]);
+
+                DB::table('choices')->insert([
+                    'id' => '19',
+                    'text' => 'c#',
+                    'question_id' => 5,
+                    'is_сorrect' => true
+                ]);
+
+                DB::table('choices')->insert([
+                    'id' => '20',
+                    'text' => 'Perl',
+                    'question_id' => 5,
+                    'is_сorrect' => false
+                ]);
+            }
+        }
     }
 }
