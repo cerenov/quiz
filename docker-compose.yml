@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: quiz
+        uid: 1000
+      context: ./
+      dockerfile: ./.docker/Dockerfile
+    image: quiz
+    container_name: quiz-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./quiz/:/var/www
+    networks:
+      - quiz
+
+  nginx:
+    image: nginx:alpine
+    container_name: quiz-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./quiz/:/var/www
+      - ./.docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - quiz
+
+  db:
+    image: mysql:5.7.29
+    container_name: quiz-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: quiz
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - quiz
+
+
+networks:
+  quiz:
+    driver: bridge
